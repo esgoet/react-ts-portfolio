@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { navLinks } from "../constants"
 
 const NavBar = () => {
@@ -7,7 +6,7 @@ const NavBar = () => {
         <>
         <nav>
             {navLinks.map((link) => (
-                <Link key={link.id} to={`/${link.id}`}>{link.title}</Link>
+                <a key={link.id} href={`#${link.id}`}>{link.title}</a>
             ))}
         </nav>
         </>
