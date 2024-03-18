@@ -3,7 +3,10 @@ import { Form } from "react-router-dom";
 const Contact = () => {
     return (
         <>
-        <div id="contact">Contact Me</div>
+        <section id="contact">
+            <h2>Contact Me</h2>
+        </section>
+        
         </>
     )
 }

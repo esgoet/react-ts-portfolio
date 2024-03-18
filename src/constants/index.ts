@@ -24,13 +24,16 @@ export const navLinks: {
   id: string;
   title: string;
 }[]= [
+  { id: "",
+    title: "Home",
+  },
   {
     id: "about",
     title: "About",
   },
   {
-    id: "work",
-    title: "Work",
+    id: "projects",
+    title: "Projects",
   },
   {
     id: "contact",
