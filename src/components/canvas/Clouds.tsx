@@ -3,9 +3,6 @@ import { useGLTF, PresentationControls, useTexture, OrbitControls } from "@react
 import { NearestFilter } from "three"
 import { useRef, useState } from "react"
 import { useSpring, animated, config } from "@react-spring/three"
-import { EffectComposer, Bloom, LensFlare } from "@react-three/postprocessing"
-// import { useSpring } from "@react-spring/three"
-import CssSun from "../Sun"
 
 interface CloudsProps {
     onClick: () => void,
@@ -28,7 +25,7 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
     const { rightCloudsPos } = useSpring({ rightCloudsPos: clicked ? [30,0,0] : hovered ? [1,0,0]: [0,0,0], config: springConfig})
 
 
-    const clouds = useGLTF('/clouds/clouds_mat.glb')
+    const clouds = useGLTF('/clouds/clouds.glb')
     console.log(clouds)
 
     const threeTone = useTexture('clouds/threeTone.jpg')
@@ -112,41 +109,18 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
 
             </animated.group>
 
-        </group>
-            
+        </group>            
 
         </>
     )
 }
 
-// interface SunProps {
-//     onClick: () => void,
-//     clicked: boolean
-// }
-
-// const Sun = ({ onClick, clicked } : SunProps) => {
-//     const sunRef = useRef()
-//     const { sunPos } = useSpring({sunPos: clicked ? [5,3,-3] : [5,9,-3], config: config.wobbly, delay: 750})
-
-//     return (
-//         <animated.mesh
-//             ref={sunRef}
-//             position={sunPos}
-//             onClick={onClick}
-//             >
-//             <sphereGeometry
-//                 args={[2, 16, 16]}
-//              />
-//             <meshBasicMaterial 
-//             color={[2, 2, 0.8]}
-//             toneMapped={false}/>
-//         </animated.mesh>
-//     )
-// }
-
-
-const CloudCanvas = () => {
-    const [clicked, setClicked] = useState(false)
+interface CloudCanvasProps {
+    firstClicked: boolean,
+    handleFirstClick: () => void
+}
+const CloudCanvas = ({firstClicked, handleFirstClick} : CloudCanvasProps) => {
+ 
     const [hovered, setHovered] = useState(false)
 
 
@@ -162,21 +136,17 @@ const CloudCanvas = () => {
             position: [0,0,0],
             left: 0,
             right: 0.5,
-            zoom: 70
+            zoom: 50
           }}
           orthographic
          >
             <Clouds 
-            onClick={()=>setClicked(!clicked)}  
+            onClick={handleFirstClick}  
             onPointerEnter={() => setHovered(true)}
             onPointerLeave={() => setHovered(false)} 
-            clicked={clicked}
+            clicked={firstClicked}
             hovered={hovered}
             />
-            {/* <Sun 
-            clicked={clicked}   
-            onClick={()=>setClicked(!clicked)}
-            /> */}
             <OrbitControls/>
    
 
@@ -184,13 +154,11 @@ const CloudCanvas = () => {
         {/* <hemisphereLight intensity={0.1} skyColor={0xc4eaff} /> */}
        
        {/* <directionalLight intensity={9} color={0xffffff} position={[3,6,2]} /> */}
+
       
             
         </Canvas>
-        <CssSun 
-            clicked={clicked}   
-            onClick={()=>setClicked(!clicked)}
-            />
+
          </div>
 
         </>
