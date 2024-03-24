@@ -1,8 +1,8 @@
 import { Canvas } from "@react-three/fiber"
-import { useGLTF, PresentationControls, useTexture, OrbitControls } from "@react-three/drei"
-import { NearestFilter } from "three"
-import { useRef, useState } from "react"
-import { useSpring, animated, config } from "@react-spring/three"
+import { useGLTF, useTexture, OrbitControls, useAnimations } from "@react-three/drei"
+import { LoopOnce, NearestFilter } from "three"
+import { useState, useEffect } from "react"
+import { useSpring, animated, config, useSprings } from "@react-spring/three"
 
 interface CloudsProps {
     onClick: () => void,
@@ -15,96 +15,85 @@ interface CloudsProps {
 
 const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : CloudsProps) => {
 
-    const leftClouds = useRef();
-    const rightClouds = useRef();
     const springConfig = {
         tension: 280,
-        friction: 200
+        friction: 220
     }
-    const { leftCloudsPos } = useSpring({ leftCloudsPos : clicked ? [-30,0,0] : hovered ? [-1,0,0] : [0,0,0], config: springConfig})
-    const { rightCloudsPos } = useSpring({ rightCloudsPos: clicked ? [30,0,0] : hovered ? [1,0,0]: [0,0,0], config: springConfig})
 
+    // clicked ? [-30,0,20] :
+    const { leftCloudsPos } = useSpring({ leftCloudsPos : clicked ? [-30,0,20] : hovered ? [-1,0,0] : [0,0,0], config: springConfig})
+    const { rightCloudsPos } = useSpring({ rightCloudsPos:  clicked ? [30,0,20] :hovered ? [1,0,0]: [0,0,0], config: springConfig})
+    const { leftRotation } = useSpring({ leftRotation: clicked ? [0,0.7,0] : [0,0,0], config: config.slow})
+    const { rightRotation } = useSpring({ rightRotation: clicked ? [0,-0.7,0] : [0,0,0], config: config.slow})
 
-    const clouds = useGLTF('/clouds/clouds.glb')
-    console.log(clouds)
+    const { scene, materials, animations }= useGLTF('/clouds/clouds_anim.gltf')
 
-    const threeTone = useTexture('clouds/threeTone.jpg')
-    threeTone.minFilter = NearestFilter;
-    threeTone.magFilter = NearestFilter;
+//      // Extract animation actions
+//   const { ref, actions } = useAnimations(animations);
+//   console.log(actions)
+  
+  
 
-    const pinkMap = useTexture('clouds/pinkColorMap.jpg')
+//       // Change animation when the index changes
+//   useEffect(() => {
+//     if (clicked) {
+        
+//         actions['Animation']?.setLoop(LoopOnce,0)
+//         actions['Animation']?.play()
+//         actions['Animation']?.halt(2.43)
+//     }
+//   }, [clicked]);
 
-    const colors = [0xFFFFEC, 0xfff9e6, 0xFFEbF1]
-    let colorIndex = colors.length-1;
-    
 
     return (
         <>
         <group
+        // ref={ref}
         onClick={onClick}   
         onPointerEnter={onPointerEnter}
         onPointerLeave={onPointerLeave}
-        // scale={0.3}
+        scale={0.5}
         position={[0,0,-10]}
        >
             <animated.group
-                ref={leftClouds}
-                position={leftCloudsPos}            
+                position={leftCloudsPos}   
+                rotation={leftRotation}         
             >
-                {clouds.scene.children.map((cloud) => {
-                    colorIndex = colorIndex === colors.length - 1 ? 0 : colorIndex + 1
-                // colorIndex = Math.floor(Math.random() * 3)
-                const cloudIndex = parseInt(cloud.name.slice(-3))
-                if (cloudIndex <= 10) {
-                    return (
-                        <mesh
-                        key={cloud.name}
-                        name={cloud.name}
-                        geometry={cloud.geometry}
-                        position={cloud.position}
-                        // material={clouds.materials.CloudMaterial}
-                        >
-                            <meshDepthMaterial 
-                            map={pinkMap}
-                            // color={colors[colorIndex]} 
-                            // gradientMap={threeTone}
+                {scene.children.map((cloud) => {
+                    const cloudIndex = parseInt(cloud.name.slice(-3))
+                    if (cloudIndex <= 10) {
+                        return (
+                            <mesh
+                            key={cloud.name}
+                            name={cloud.name}
+                            geometry={cloud.geometry}
+                            position={cloud.position}
+                            material={materials.CloudMaterial}
                             />
-                        </mesh>
-                        )
+                            )
 
-                }
-                return
-                  
+                    }
+                    return 
                 })}
             </animated.group> 
             <animated.group
-                ref={rightClouds}
                 position={rightCloudsPos}
+                rotation={rightRotation}
             >
-                    {clouds.scene.children.map((cloud) => {
-                    colorIndex = colorIndex === colors.length - 1 ? 0 : colorIndex + 1
-                // colorIndex = Math.floor(Math.random() * 3)
-                const cloudIndex = parseInt(cloud.name.slice(-3))
-                if (cloudIndex > 10) {
-                    return (
-                        <mesh
-                        key={cloud.name}
-                        name={cloud.name}
-                        geometry={cloud.geometry}
-                        position={cloud.position}
-                        >
-                            <meshDepthMaterial 
-                            transparent
-                            map={pinkMap}
-                            // color={colors[colorIndex]} 
-                            // gradientMap={threeTone}
+                {scene.children.map((cloud) => {     
+                    const cloudIndex = parseInt(cloud.name.slice(-3))
+                    if (cloudIndex > 10) {
+                        return (
+                            <mesh
+                            key={cloud.name}
+                            name={cloud.name}
+                            geometry={cloud.geometry}
+                            position={cloud.position}
+                            material={materials.CloudMaterial}
                             />
-                        </mesh>
-                        )
-
-                }
-                return
-                  
+                            )
+                    }
+                    return
                 })}
 
             </animated.group>
@@ -116,42 +105,38 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
 }
 
 interface CloudCanvasProps {
-    firstClicked: boolean,
-    handleFirstClick: () => void
+    clicked: boolean,
+    handleClick: () => void
 }
-const CloudCanvas = ({firstClicked, handleFirstClick} : CloudCanvasProps) => {
- 
+const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
     const [hovered, setHovered] = useState(false)
-
 
     return (
         <>
-         <div className="h-screen w-screen absolute top-0 left-0">
+         <div className={`h-screen w-screen absolute top-0 left-0 ${clicked ? '-z-10' : 'z-20'} ${hovered && 'cursor-pointer'}`}>
          <Canvas
           gl={{ preserveDrawingBuffer: true }}
           camera={{
-            // fov: 50,
-            near: 0.1,
+            near: 0.01,
             far: 20,
             position: [0,0,0],
-            left: 0,
-            right: 0.5,
-            zoom: 50
+            // left: 0,
+            // right: 0.5,
+            // zoom: 40
           }}
-          orthographic
+        //   orthographic
          >
             <Clouds 
-            onClick={handleFirstClick}  
+            onClick={handleClick}  
             onPointerEnter={() => setHovered(true)}
             onPointerLeave={() => setHovered(false)} 
-            clicked={firstClicked}
+            clicked={clicked}
             hovered={hovered}
             />
-            <OrbitControls/>
    
 
-                    <ambientLight intensity={1} color={0xffffff} />
-        {/* <hemisphereLight intensity={0.1} skyColor={0xc4eaff} /> */}
+                    {/* <ambientLight intensity={3} color={0xffffff} /> */}
+        <hemisphereLight intensity={3} color={0xc4eaff} groundColor={0xffe6cc}/>
        
        {/* <directionalLight intensity={9} color={0xffffff} position={[3,6,2]} /> */}
 

@@ -4,11 +4,10 @@ const NavBar = () => {
 
     return (
         <>
-        <nav>
+        
             {navLinks.map((link) => (
-                <a key={link.id} href={`#${link.id}`}>{link.title}</a>
+                <a key={link.id} href={`/#${link.id}`}>{link.title}</a>
             ))}
-        </nav>
         </>
     )
 }

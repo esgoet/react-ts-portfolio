@@ -7,26 +7,27 @@ interface SunProps {
 }
 
 const Sun = ({clicked, onClick} : SunProps) => {
-    const [hovering, setHovering ] = useState(true)
     const { top } = useSpring({
-        from: { top: -300 },
-        top: clicked ? 110 : -300,
+        from: { top: -350 },
+        top: clicked ? 110 : -350,
         delay: 750,
         config: config.wobbly
         })
     
     return (
         <>
+        <div className={`flex w-full h-full text-center place-items-center -z-20`}>
+            <h1 className="bold">Welcome!</h1>
+        </div>
+
         <animated.div 
             onClick={onClick} 
-            onPointerEnter={() => setHovering(true)} 
-            onPointerLeave={() => setHovering(false)}
             style={{top: top}} 
-            className={`absolute w-[300px] h-[300px] right-[130px] flex justify-center justify-items-center content-center items-center`}>
+            className={`absolute w-[300px] h-[300px] right-[130px] flex place-items-center place-content-center`}>
             <div className={`absolute bg-white blur-lg rounded-full  w-full h-full`} />
-            <div className={`absolute bg-white rounded-3xl ${hovering && "animate-spin-slow animate-pulse"} w-[80%] h-[50%] blur-lg`}/>
-            <div className={`absolute bg-white rounded-3xl ${hovering && "animate-spin-slower"} w-[60%] h-[80%] blur-lg`}/>
-            <div className={`absolute bg-white rounded-3xl ${hovering && "animate-spin-slower animate-pulse"} w-[70%] h-[75%] blur-lg`}/>
+            <div className={`absolute bg-white rounded-3xl animate-spin-slow w-[80%] h-[50%] blur-lg`}/>
+            <div className={`absolute bg-white rounded-3xl animate-spin-slower w-[60%] h-[80%] blur-lg`}/>
+            <div className={`absolute bg-white rounded-3xl animate-pulse w-[70%] h-[75%] blur-lg`}/>
        
             <div className="absolute bg-amber-100 rounded-full w-[90%] h-[90%] blur-sm"/>
             <div className="absolute bg-amber-50 rounded-full w-[90%] h-[90%] blur-sm"/>

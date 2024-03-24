@@ -6,25 +6,44 @@ import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
 import { useState } from 'react'
+import Rain from './components/Rain'
 
 const App = () => {
   const [firstClicked, setFirstClicked] = useState(false)
 
   return (
     <>
-      <CloudCanvas firstClicked={firstClicked} handleFirstClick={()=>setFirstClicked(!firstClicked)}/>
-      <NavBar />
-      <main className='w-screen h-screen'>
+        <CloudCanvas clicked={firstClicked} handleClick={()=>setFirstClicked(!firstClicked)}/>
+        {/* <Rain clicked={firstClicked}/> */}
+  
+   <div className='w-screen h-screen flex flex-col justify-stretch overflow-hidden'>
+      <header>
+        
+
+      </header>
+      <nav className='absolute'>
+      <NavBar />    
+
+      </nav>
+
+  
+      <main>
         <Sun 
           clicked={firstClicked}   
           onClick={()=>setFirstClicked(!firstClicked)}
-         />
+        />
+  
         <About />
         <Projects />
         <Contact />
 
       </main>
- 
+      <footer>
+      </footer>
+
+
+   </div>
+       
 
     </>
   )
