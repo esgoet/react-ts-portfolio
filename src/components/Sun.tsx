@@ -1,5 +1,4 @@
 import { useSpring, animated, config } from "@react-spring/web"
-import { useState } from "react"
 
 interface SunProps {
     onClick: () => void,

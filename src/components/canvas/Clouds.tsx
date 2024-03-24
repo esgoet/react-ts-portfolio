@@ -1,8 +1,9 @@
 import { Canvas } from "@react-three/fiber"
-import { useGLTF, useTexture, OrbitControls, useAnimations } from "@react-three/drei"
-import { LoopOnce, NearestFilter } from "three"
-import { useState, useEffect } from "react"
-import { useSpring, animated, config, useSprings } from "@react-spring/three"
+import { useGLTF } from "@react-three/drei"
+// import { LoopOnce, NearestFilter } from "three"
+import { useState} from "react"
+import { useSpring, animated, config} from "@react-spring/three"
+import { Mesh } from "three"
 
 interface CloudsProps {
     onClick: () => void,
@@ -26,7 +27,8 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
     const { leftRotation } = useSpring({ leftRotation: clicked ? [0,0.7,0] : [0,0,0], config: config.slow})
     const { rightRotation } = useSpring({ rightRotation: clicked ? [0,-0.7,0] : [0,0,0], config: config.slow})
 
-    const { scene, materials, animations }= useGLTF('/clouds/clouds_anim.gltf')
+    // add animations here if using them later on
+    const { scene, materials }= useGLTF('/clouds/clouds_anim.gltf')
 
 //      // Extract animation actions
 //   const { ref, actions } = useAnimations(animations);
@@ -56,42 +58,47 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
         position={[0,0,-10]}
        >
             <animated.group
-                position={leftCloudsPos}   
-                rotation={leftRotation}         
+                position={leftCloudsPos  as any}   
+                rotation={leftRotation  as any}         
             >
                 {scene.children.map((cloud) => {
                     const cloudIndex = parseInt(cloud.name.slice(-3))
                     if (cloudIndex <= 10) {
-                        return (
-                            <mesh
-                            key={cloud.name}
-                            name={cloud.name}
-                            geometry={cloud.geometry}
-                            position={cloud.position}
-                            material={materials.CloudMaterial}
-                            />
-                            )
+                        if (cloud instanceof Mesh){
+                            return (
+                                <mesh
+                                key={cloud.name}
+                                name={cloud.name}
+                                geometry={cloud.geometry}
+                                position={cloud.position}
+                                material={materials.CloudMaterial}
+                                />
+                                )
+                        }
 
                     }
                     return 
                 })}
             </animated.group> 
             <animated.group
-                position={rightCloudsPos}
-                rotation={rightRotation}
+                position={rightCloudsPos  as any}
+                rotation={rightRotation  as any}
             >
                 {scene.children.map((cloud) => {     
                     const cloudIndex = parseInt(cloud.name.slice(-3))
                     if (cloudIndex > 10) {
-                        return (
-                            <mesh
-                            key={cloud.name}
-                            name={cloud.name}
-                            geometry={cloud.geometry}
-                            position={cloud.position}
-                            material={materials.CloudMaterial}
-                            />
-                            )
+                        if (cloud instanceof Mesh){
+                            return (
+                                <mesh
+                                key={cloud.name}
+                                name={cloud.name}
+                                geometry={cloud.geometry}
+                                position={cloud.position}
+                                material={materials.CloudMaterial}
+                                />
+                                )
+                        }
+                
                     }
                     return
                 })}

@@ -6,7 +6,7 @@ import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
 import { useState } from 'react'
-import Rain from './components/Rain'
+// import Rain from './components/Rain'
 
 const App = () => {
   const [firstClicked, setFirstClicked] = useState(false)
