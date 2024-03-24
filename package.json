@@ -1,7 +1,7 @@
 {
   "name": "ts-portfolio",
   "private": true,
-  "base": "/react-ts-portfolio/",
+  "homepage": "https://esgoet.github.io/react-ts-portfolio/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

@@ -28,7 +28,7 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
     const { rightRotation } = useSpring({ rightRotation: clicked ? [0,-0.7,0] : [0,0,0], config: config.slow})
 
     // add animations here if using them later on
-    const { scene, materials }= useGLTF('/clouds/clouds_anim.gltf')
+    const { scene, materials }= useGLTF('/react-ts-portfolio/clouds/clouds_anim.gltf')
 
 //      // Extract animation actions
 //   const { ref, actions } = useAnimations(animations);
