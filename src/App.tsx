@@ -6,6 +6,7 @@ import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
 import { useState } from 'react'
+import ModuleBlock from './components/ModuleBlock'
 // import Rain from './components/Rain'
 
 const App = () => {
@@ -15,8 +16,13 @@ const App = () => {
     <>
         <CloudCanvas clicked={firstClicked} handleClick={()=>setFirstClicked(!firstClicked)}/>
         {/* <Rain clicked={firstClicked}/> */}
+   
   
-   <div className='w-screen h-screen flex flex-col justify-stretch overflow-hidden'>
+   <div className='w-screen h-screen flex flex-row justify-stretch overflow-hidden'>
+   <Sun 
+          clicked={firstClicked}   
+          onClick={()=>setFirstClicked(!firstClicked)}
+        />
       <header>
         
 
@@ -27,11 +33,10 @@ const App = () => {
       </nav>
 
   
-      <main>
-        <Sun 
-          clicked={firstClicked}   
-          onClick={()=>setFirstClicked(!firstClicked)}
-        />
+      <main className='flex place-items-center place-content-center w-full h-full'>
+
+ 
+        {/* <ModuleBlock/> */}
   
         <About />
         <Projects />

@@ -1,10 +1,12 @@
+import ModuleBlock from "./ModuleBlock";
+
 const About = () => {
+    const about = (
+        <p> Test</p>
+    )
     return (
         <>
-        <section id='about'>
-        <h2>About Me</h2>
-
-        </section>
+        <ModuleBlock heading="About Me" sectionId='about' content={about}/>
         </>
     )
 }
