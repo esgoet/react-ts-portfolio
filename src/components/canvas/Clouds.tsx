@@ -1,16 +1,19 @@
 import { Canvas } from "@react-three/fiber"
 import { useGLTF } from "@react-three/drei"
 // import { LoopOnce, NearestFilter } from "three"
-import { useState} from "react"
+import { useRef, useState} from "react"
 import { useSpring, animated, config} from "@react-spring/three"
-import { Mesh } from "three"
+import { Group, Mesh } from "three"
+import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing"
+import { BlendFunction } from "postprocessing"
 
 interface CloudsProps {
     onClick: () => void,
     onPointerEnter: () => void,
     onPointerLeave: () => void,
     clicked: boolean,
-    hovered: boolean
+    hovered: boolean,
+    // ref: Ref<Group>
 
 }
 
@@ -49,63 +52,79 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
 
     return (
         <>
-        <group
-        // ref={ref}
-        onClick={onClick}   
-        onPointerEnter={onPointerEnter}
-        onPointerLeave={onPointerLeave}
-        scale={0.5}
-        position={[0,0,-10]}
-       >
-            <animated.group
-                position={leftCloudsPos  as any}   
-                rotation={leftRotation  as any}         
-            >
-                {scene.children.map((cloud) => {
-                    const cloudIndex = parseInt(cloud.name.slice(-3))
-                    if (cloudIndex <= 10) {
-                        if (cloud instanceof Mesh){
-                            return (
-                                <mesh
-                                key={cloud.name}
-                                name={cloud.name}
-                                geometry={cloud.geometry}
-                                position={cloud.position}
-                                material={materials.CloudMaterial}
-                                />
-                                )
-                        }
+        <Selection>
+            <EffectComposer autoClear={false}>
+                <Outline
+                // selection={cloudsRef.current !== undefined && [cloudsRef.current] as any}
+                // selectionLayer={0}
+                edgeStrength={10}
+                blur
+                visibleEdgeColor={0x000000}
+                hiddenEdgeColor={0xffffff}
+                xRay={false}
+                blendFunction={BlendFunction.SCREEN}
+                />
+            </EffectComposer>  
+            <Select enabled>
+                <group
+                    onClick={onClick}   
+                    onPointerEnter={onPointerEnter}
+                    onPointerLeave={onPointerLeave}
+                    scale={0.5}
+                    position={[0,0,-10]}
+                >
+                    <animated.group
+                        position={leftCloudsPos  as any}   
+                        rotation={leftRotation  as any}         
+                    >
+                        {scene.children.map((cloud) => {
+                            const cloudIndex = parseInt(cloud.name.slice(-3))
+                            if (cloudIndex <= 10) {
+                                if (cloud instanceof Mesh){
+                                    return (
+                                        <mesh
+                                        key={cloud.name}
+                                        name={cloud.name}
+                                        geometry={cloud.geometry}
+                                        position={cloud.position}
+                                        material={materials.CloudMaterial}
+                                        /> 
+                                        )
+                                }
+                            }
+                            return 
+                        })}
+                    </animated.group> 
+                    <animated.group
+                        position={rightCloudsPos  as any}
+                        rotation={rightRotation  as any}
+                    >
+                        {scene.children.map((cloud) => {     
+                            const cloudIndex = parseInt(cloud.name.slice(-3))
+                            if (cloudIndex > 10) {
+                                if (cloud instanceof Mesh){
+                                    return (
+                                        <mesh
+                                        key={cloud.name}
+                                        name={cloud.name}
+                                        geometry={cloud.geometry}
+                                        position={cloud.position}
+                                        material={materials.CloudMaterial}
+                                        />
+                                        )
+                                }
+                        
+                            }
+                            return
+                        })}
 
-                    }
-                    return 
-                })}
-            </animated.group> 
-            <animated.group
-                position={rightCloudsPos  as any}
-                rotation={rightRotation  as any}
-            >
-                {scene.children.map((cloud) => {     
-                    const cloudIndex = parseInt(cloud.name.slice(-3))
-                    if (cloudIndex > 10) {
-                        if (cloud instanceof Mesh){
-                            return (
-                                <mesh
-                                key={cloud.name}
-                                name={cloud.name}
-                                geometry={cloud.geometry}
-                                position={cloud.position}
-                                material={materials.CloudMaterial}
-                                />
-                                )
-                        }
-                
-                    }
-                    return
-                })}
-
-            </animated.group>
-
-        </group>            
+                    </animated.group>
+                </group>  
+            </Select>
+        </Selection>
+        
+       
+         
 
         </>
     )
@@ -117,6 +136,7 @@ interface CloudCanvasProps {
 }
 const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
     const [hovered, setHovered] = useState(false)
+    // const cloudsRef = useRef(null)
 
     return (
         <>
@@ -139,6 +159,7 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
             onPointerLeave={() => setHovered(false)} 
             clicked={clicked}
             hovered={hovered}
+            // ref={cloudsRef}
             />
    
 
@@ -147,7 +168,7 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
        
        {/* <directionalLight intensity={9} color={0xffffff} position={[3,6,2]} /> */}
 
-      
+    
             
         </Canvas>
 
