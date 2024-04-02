@@ -123,9 +123,9 @@ const Contact = () => {
 
     const contact = (
         <>
-        <p className="italic mb-3 text-pretty">Pop me a message below and I'll get back to you!</p>
+        <p className="italic mb-3 text-pretty px-4">Pop me a message below and I'll get back to you!</p>
         <form
-            ref={formRef}
+            ref={formRef as any}
             onSubmit={handleSubmit}
             className="flex flex-col gap-4"
           >
@@ -152,8 +152,9 @@ const Contact = () => {
             />
             <button
               type="submit"
-              className="bg-peach border border-black hover:bg-peach/80 py-2 px-6 sm:py-2 sm:px-6 outline-none w-fit text-black font-bold
-           rounded-lg self-end"
+              className="peachBtn"
+          //     className="bg-peach border border-black hover:bg-peach/80 py-2 px-6 sm:py-2 sm:px-6 outline-none w-fit text-black font-bold
+          //  rounded-lg self-end"
             >
               {loading ? "Sending..." : "Send"}
             </button>

@@ -7,6 +7,7 @@ import Sun from './components/Sun'
 
 import { useState } from 'react'
 import ModuleBlock from './components/ModuleBlock'
+import MyImage from './components/MyImage'
 // import Rain from './components/Rain'
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
         {/* <Rain clicked={firstClicked}/> */}
    
   
-   <div className='w-screen h-screen flex flex-row justify-stretch overflow-hidden'>
+   <div className='w-screen h-screen flex flex-row justify-stretch'>
    <Sun 
           clicked={firstClicked}   
           onClick={()=>setFirstClicked(!firstClicked)}
@@ -33,9 +34,9 @@ const App = () => {
       </nav>
 
   
-      <main className='flex place-items-center place-content-center w-full h-full'>
-  
+      <main className='flex flex-col place-items-center place-content-center w-full sm:max-w-3xl h-full m-auto flex-wrap'>
         <About />
+        <MyImage />
         <Projects />
         <Contact />
 

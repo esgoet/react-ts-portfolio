@@ -36,7 +36,21 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+/* "bg-peach border border-black hover:bg-peach/80 py-2 px-6 outline-none w-fit text-black font-bold
+           rounded-lg self-end" */
 
+@layer components {
+  .peachBtn {
+    /* background-color: theme('colors.peach');
+    border-radius: theme('borderRadius.lg');
+    border-color: theme('borderColor.black');
+    border-width: theme('borderWidth.DEFAULT');
+    padding: theme('padding.2') theme('padding.6'); */
+    @apply border border-black  bg-peach hover:bg-peach/80 py-2 px-6 outline-none w-fit text-black font-bold
+    rounded-lg self-end
+
+  }
+}
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;

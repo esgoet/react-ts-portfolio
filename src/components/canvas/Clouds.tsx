@@ -143,6 +143,7 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
          <div className={`h-screen w-screen absolute top-0 left-0 ${clicked ? '-z-10' : 'z-20'} ${hovered && 'cursor-pointer'}`}>
          <Canvas
           gl={{ preserveDrawingBuffer: true }}
+          frameloop="demand"
           camera={{
             near: 0.01,
             far: 20,
