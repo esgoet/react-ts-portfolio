@@ -8,6 +8,14 @@ export default {
 ],
   theme: {
     extend: {
+      colors: {
+        blue: "#c7e6f8",
+        peach: "#f6aab5",
+        lilac: "#ccabd8",
+        beige: "#e9dfd8",
+        lavender: "#cdd2e7",
+        grey: "2e2e2e",
+      },
       keyframes: {
         drip: {
           '100%': {marginTop: '90vh',

@@ -34,9 +34,6 @@ const App = () => {
 
   
       <main className='flex place-items-center place-content-center w-full h-full'>
-
- 
-        {/* <ModuleBlock/> */}
   
         <About />
         <Projects />

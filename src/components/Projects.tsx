@@ -1,9 +1,14 @@
+import ModuleBlock from "./ModuleBlock";
+
 const Projects = () => {
+    const projects = (
+        <>
+        </>
+
+    )
     return (
         <>
-        <section id='projects'>
-            <h2 >My Projects</h2>
-        </section>
+        <ModuleBlock heading="My Projects" sectionId='projects' content={projects}/>
 
         </>
     )
