@@ -8,39 +8,68 @@ import Sun from './components/Sun'
 import { useState } from 'react'
 import ModuleBlock from './components/ModuleBlock'
 import MyImage from './components/MyImage'
+import MyArt from './components/MyArt'
+import Hello from './components/Hello'
 // import Rain from './components/Rain'
 
 const App = () => {
   const [firstClicked, setFirstClicked] = useState(false)
+  const [currentSection, setCurrentSection]= useState(null)
 
   return (
     <>
         <CloudCanvas clicked={firstClicked} handleClick={()=>setFirstClicked(!firstClicked)}/>
         {/* <Rain clicked={firstClicked}/> */}
-   
-  
-   <div className='w-screen h-screen flex flex-row justify-stretch'>
-   <Sun 
+        <div className='sm:max-w-5xl sm:mx-auto relative -top-10'>
+        <Sun 
           clicked={firstClicked}   
           onClick={()=>setFirstClicked(!firstClicked)}
         />
+        </div>
+
+  
+   <div className={`w-screen h-full transition duration-[3000ms] delay-200 ${firstClicked ? "opacity-100 h-full" : "opacity-0 h-screen overflow-hidden"}`}>
+    
       <header>
         
 
       </header>
-      <nav className='absolute'>
-      <NavBar />    
+      <div className='sm:my-[100px] '>
 
-      </nav>
+        {/* <nav className='w-full h-full sticky top-0 p-2 mb-1.5 z-10 backdrop-blur-md bg-amber-50/60 border-y-2 border-black'> */}
+        <nav className='w-full h-full sticky top-0 p-2 mb-1.5 z-10 bg-blue border-b-2 border-black'>
+          <div
+            className='sm:max-w-5xl sm:mx-auto gap-2 flex place-items-center'
+          >
 
+            <NavBar />    
+
+          </div>
+
+        </nav>    
+
+    
+        <main className='relative sm:grid grid-cols-3 grid-rows-auto grid-flow-row place-items-stretch place-content-stretch sm:max-w-5xl sm:mx-auto h-full gap-3.5 snap-proximity snap-y'>
+          <Hello />
+          <MyImage />
+          <div/>
+        
+          <About />
+          <ModuleBlock heading="My Background" />
+          <MyArt />
+          <Projects />
+          <MyArt />
+
+            
+          
+          <Contact />
+          <MyArt />
+
+
+        </main>
+
+      </div>
   
-      <main className='flex flex-col place-items-center place-content-center w-full sm:max-w-3xl h-full m-auto flex-wrap'>
-        <About />
-        <MyImage />
-        <Projects />
-        <Contact />
-
-      </main>
       <footer>
       </footer>
 

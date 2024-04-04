@@ -1,42 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ModuleBlock from "./ModuleBlock";
 import { projects } from "../constants";
-import { filtersymbol, leftarrow, rightarrow } from "../assets";
+import { filtersymbol } from "../assets";
 
 interface TagProps {
     name: string, 
     type: string,
     size: number,
-    onClick: () => void,
+    onClick: (e : React.MouseEvent<HTMLInputElement>) => void,
     filterType: string,
     weight: number
 
 }
-
-const tags :   {
-    name: string,
-    type: string,
-    weight: number
-}[] = [];
-const tagTypes: string[]= [];
-
- // get all tags from all projects and sort them alphabetically
- projects.map((project) =>
- project.tags.map((tag) => {
-     if (!tags.find((el) => el.name === tag.name)) {
-     tags.push({...tag, weight: 1} );
-     } else {
-     tags.find((el) => el.name === tag.name).weight +=1;
-
-     }
- })
- );
-
- tags.sort((a,b)=>(a.name > b.name));
- tags.sort((a, b) => a.weight - b.weight);
- tags.reverse();
-
- tagTypes.push("device", "platform", "language", "library", "software") 
 
 const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps ) => {
     const fontSize = `text-[${size}px]`;
@@ -79,8 +54,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
     description: string,
     tags: {
         name: string,
-        type: string,
-        weight: number
+        type: string
     }[];
     image: string,
     source_code_link: string
@@ -92,7 +66,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
     return (
       <>
         <div
-          className="sm:flex-none sm:w-[320px] flex flex-col justify-between"
+          className="sm:flex-none sm:w-[320px] flex flex-col justify-between snap-start"
         >
           <div className="p-5 bg-primary border-2 border-black rounded-t-lg h-full">
             <div className="relative w-full h-[150px] ">
@@ -147,37 +121,55 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
 
 const Projects = () => {
     const [currentProjects, setCurrentProjects] = useState(projects);
+    const galleryRef = useRef<HTMLDivElement>(null);
    
-
-    // useEffect(()=> {
-    //     // get all tags from all projects and sort them alphabetically
-    //     projects.map((project) =>
-    //     project.tags.map((tag) => {
-    //         if (!tags.find((el) => el.name === tag.name)) {
-    //         tags.push({...tag, weight: 1} );
-    //         } else {
-    //         tags.find((el) => el.name === tag.name).weight +=1;
-
-    //         }
-    //     })
-    //     );
-
-    //     tags.sort((a,b)=>(a.name > b.name));
-    //     tags.sort((a, b) => a.weight - b.weight);
-    //     tags.reverse();
-
-    //     tagTypes.push("device", "platform", "language", "library", "software")
-
-    // }, [])
-
-  const checkTag = (e : React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      e.target.parentNode.style.backgroundColor = "#5a65fc";
-      e.target.nextSibling.innerHTML = `&#x00D7; #`;
-    } else {
-      e.target.parentNode.style.backgroundColor = "#6200EA";
-      e.target.nextSibling.innerHTML = "#";
+    interface Tag {
+        name: string,
+        type: string,
+        weight: number
     }
+
+    const [allTags, setAllTags] = useState<Tag[]>()
+
+    const [tagTypes, setTagTypes] = useState(['']);
+
+    useEffect(()=> {
+        const tags : Tag[] = []
+        // get all tags from all projects and sort them alphabetically
+        projects.map((project) =>
+        project.tags.map((tag) => {
+            const tagName = tags?.find((el) => el.name === tag.name)
+            if (!tagName) {
+                tags.push({...tag, weight: 1})
+            } else {
+            tagName.weight +=1;
+            }
+        })
+        );
+
+        tags.sort((a,b)=>(b.name.localeCompare(a.name)));
+        tags.sort((a, b) => a.weight - b.weight);
+        tags.reverse();
+        setAllTags(tags);
+
+        setTagTypes(["device", "platform", "language", "library", "software"]) 
+
+    }, [])
+
+  const checkTag = (e : React.MouseEvent<HTMLInputElement>) => {
+    const parentNode = (e.target as HTMLInputElement).parentNode as HTMLLabelElement;
+    const nextSibling = (e.target as HTMLInputElement).nextSibling as HTMLSpanElement;
+
+    if (parentNode && nextSibling) {
+        if ((e.target as HTMLInputElement).checked) {
+            parentNode.style.backgroundColor = "#f6aab5";
+            nextSibling.innerHTML = `&#x00D7; #`;
+          } else {
+            parentNode.style.backgroundColor = '';
+            nextSibling.innerHTML = "#";
+          }
+    }
+
     filterProjects();
   };
 
@@ -186,27 +178,30 @@ const Projects = () => {
 
     document.querySelectorAll("input[type='checkbox']:checked")
       .forEach((tag) => {
-        tag.checked = false
-        tag.parentNode.style.backgroundColor = "#6200EA";
-        tag.nextSibling.innerHTML = "#";
+        (tag as HTMLInputElement).checked = false
+        if (tag.parentNode && tag.nextSibling) {
+            (tag.parentNode as HTMLLabelElement).style.backgroundColor = '';
+            (tag.nextSibling as HTMLSpanElement).innerHTML = "#";
+        }
+       
       }
         );
   }
 
-  interface projectProps {
-        name: string;
-        description: string;
+  interface ProjectProps {
+        name: string,
+        description: string,
         tags: {
-            name: string;
-            type: string;
-        }[];
-        image: string;
-        source_code_link: string;
-        filtered: boolean;
+            name: string,
+            type: string,
+        }[],
+        image: string,
+        source_code_link: string,
+        filtered: boolean,
   }
 
   const filterProjects = () => {
-    const filteredProjects : projectProps[] = [];
+    const filteredProjects : ProjectProps[] = [];
 
     // get a list of all checked tags
     const checkedTags : string[] = [];
@@ -241,89 +236,9 @@ const Projects = () => {
     }
   };
 
-    //hard-coded scroll rn, should be automated based on number of projects
-
-    const scrollGallery = (e : React.SyntheticEvent) => {
-        const gallery = document.getElementById("projectGallery");
-    
-        if (gallery != null) {
-          const galleryRect = document
-            .getElementById("projectGallery")?.getBoundingClientRect();
-    
-          const displayedProjects = document.querySelectorAll(".projectCard");
-    
-          const visibleProjects = [];
-    
-          //check if project is currently visible
-    
-          displayedProjects.forEach((project) => {
-            var rect = project.getBoundingClientRect();
-    
-            // Only completely visible elements return true:
-            if (galleryRect) {
-                if (rect.left >= galleryRect.left && rect.right <= galleryRect.right) {
-                    // if yes, add to visibleProjects
-                    visibleProjects.push(project);
-                  }
-
-            }
-       
-          });
-          // currently lags behind one render, check our effect hooks?
-        }
-    
-        
-        //compare if currentPorjects is longer than visibleProjects
-        // if yes, make scrolling possible
-        // each scroll should advance one project, til no more projects can be selected based on amount of currentprojects
-        // if not, grey out arrows
-    
-        const direction = e.target.id;
-        if (gallery != null) {
-          const currentScroll = gallery.scrollLeft;
-          console.log(currentScroll)
-    
-    
-          if (direction === 'right') {
-              gallery.scrollTo(currentScroll + 350, 0);
-              if (currentScroll === 0 ){
-                        document.getElementById(
-                          "left"
-                        ).parentElement.style.opacity = 1;
-                            document.getElementById("left").style.cursor = "pointer";
-    
-              } else if (currentScroll + 350 === 700) {
-                        document.getElementById(
-                          "right"
-                        ).parentElement.style.opacity = 0.2;
-                            document.getElementById("right").style.cursor = "not-allowed";
-              }
-          } else {
-               if (currentScroll === 340) {
-                 document.getElementById("left").parentElement.style.opacity = 0.2;
-                     document.getElementById("left").style.cursor = "not-allowed";
-               } else if (currentScroll === 690) {
-                document.getElementById("right").parentElement.style.opacity = 1;
-                  document.getElementById(
-                    "right"
-                  ).style.cursor = 'pointer';
-                
-               }
-              gallery.scrollTo(currentScroll - 350, 0);
-    
-         
-    
-          }    
-    
-        }
-        
-    
-        console.log('scrolling ' + direction)
-      }
-
     const portfolio = (
         <>
-        <div className="max-w-3xl">
+        <div>
         <form
           id="filterTagsForm"
           className="my-4 p-4 rounded-2xl flex flex-col gap-2"
@@ -357,12 +272,12 @@ const Projects = () => {
                 <legend className="text-center text-black text-[14px]">
                   {type.toUpperCase()}
                 </legend>
-                {tags.map((tag) => (
+                {allTags?.map((tag) => (
                   <ProjectTag
                     key={tag.name}
                     {...tag}
                     size={14}
-                    onClick={() => checkTag}
+                    onClick={checkTag}
                     filterType={type}
                     weight={tag.weight}
                   />
@@ -371,34 +286,13 @@ const Projects = () => {
             ))}
           </div>
         </form>
-        <div className="flex sm:flex-row items-center justify-center gap-2">
-          <div className="hidden sm:flex justify-center items-center w-[5%] opacity-20">
-            <img
-              src={leftarrow}
-              alt=""
-              className="w-full h-full  object-contain cursor-pointer"
-              id="left"
-              onClick={scrollGallery}
-            />
-          </div>
-
-          <div
-            className="flex flex-wrap sm:flex-nowrap sm:overflow-hidden gap-7 justify-start w-full sm:w-[90%]"
-            id="projectGallery"
-          >
-            {currentProjects.map((project) => (
-              <ProjectCard key={project.name} {...project} />
-            ))}
-          </div>
-          <div className="hidden sm:flex justify-center items-center w-[5%] opacity-100">
-            <img
-              src={rightarrow}
-              alt=""
-              className="w-full h-full object-contain cursor-pointer"
-              onClick={scrollGallery}
-              id="right"
-            />
-          </div>
+        <div
+        className="flex flex-wrap sm:flex-nowrap sm:overflow-x-scroll gap-5 justify-start w-full px-4 snap-x snap-mandatory"
+        id="projectGallery" ref={galleryRef}
+        >
+        {currentProjects.map((project) => (
+            <ProjectCard key={project.name} {...project}/>
+        ))}
         </div>
       </div>
         </>
@@ -406,7 +300,7 @@ const Projects = () => {
     )
     return (
         <>
-        <ModuleBlock heading="My Projects" sectionId='projects' content={portfolio}/>
+        <ModuleBlock heading="My Projects" sectionId='projects' content={portfolio} gridPos={'col-span-3'} />
 
         </>
     )

@@ -12,7 +12,7 @@ interface InputProps {
 }
 
 const elementClasses =
-"bg-white border-solid border-black border py-2 px-5 placeholder:text-secondary text-black rounded-lg outlined-none font-medium";
+"bg-white border-solid border-black border py-2 px-5 text-black text-base rounded-lg outlined-none font-medium";
 
 
 const Input = (props : InputProps) => (
@@ -34,7 +34,7 @@ const Input = (props : InputProps) => (
       id={props.name}
       onChange={props.handleChange}
       placeholder={props.placeholder}
-      className={elementClasses}
+      className={elementClasses + "resize-y sm:h-[300px]"}
       required
     />
   );
@@ -123,11 +123,11 @@ const Contact = () => {
 
     const contact = (
         <>
-        <p className="italic mb-3 text-pretty px-4">Pop me a message below and I'll get back to you!</p>
+        <p className="italic mb-3 text-balance px-2 sm:px-10">Pop me a message below and I'll get back to you!</p>
         <form
             ref={formRef as any}
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4"
+            className="flex flex-col h-full gap-5 sm:px-8"
           >
             <ContactFormElement
               label={"Your Name"}
@@ -165,7 +165,7 @@ const Contact = () => {
     )
     return (
         <>   
-        <ModuleBlock heading="Contact Me" sectionId='contact' content={contact}/>
+        <ModuleBlock heading="Contact Me" sectionId='contact' content={contact} gridPos={'col-span-2 row-span-2'} />
         </>
     )
 }

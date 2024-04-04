@@ -14,7 +14,7 @@ export default {
         lilac: "#ccabd8",
         beige: "#e9dfd8",
         lavender: "#cdd2e7",
-        grey: "2e2e2e",
+        grey: "#2e2e2e",
       },
       keyframes: {
         drip: {
@@ -46,8 +46,8 @@ export default {
         }
       },
       animation: {
-        'spin-slow': 'spin 5s ease-in 1s infinite' ,
-        'spin-slower': 'spin 6s ease-in 1s infinite reverse',
+        'spin-slow': 'spin 5s ease-in 1s 10' ,
+        'spin-slower': 'spin 6s ease-in 1s 9 reverse',
         'drip': 'drip 3s linear infinite',
         'ripple': 'ripple 2s infinite',
         'ripple-2': 'ripple2 2s infinite'

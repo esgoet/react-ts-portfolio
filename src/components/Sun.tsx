@@ -7,8 +7,8 @@ interface SunProps {
 
 const Sun = ({clicked, onClick} : SunProps) => {
     const { top } = useSpring({
-        from: { top: -350 },
-        top: clicked ? 110 : -350,
+        from: { top: -370 },
+        top: clicked ? 20 : -370,
         delay: 750,
         config: config.wobbly
         })
@@ -18,7 +18,7 @@ const Sun = ({clicked, onClick} : SunProps) => {
         <animated.div 
             onClick={onClick} 
             style={{top: top}} 
-            className={`-z-10 absolute w-[300px] h-[300px] right-[130px] flex place-items-center place-content-center`}>
+            className={`z-20 absolute w-[300px] h-[300px] -right-10 flex place-items-center place-content-center`}>
             <div className={`absolute bg-white blur-lg rounded-full  w-full h-full`} />
             <div className={`absolute bg-white rounded-3xl animate-spin-slow w-[80%] h-[50%] blur-lg`}/>
             <div className={`absolute bg-white rounded-3xl animate-spin-slower w-[60%] h-[80%] blur-lg`}/>
