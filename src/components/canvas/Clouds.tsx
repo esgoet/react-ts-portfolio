@@ -1,9 +1,9 @@
 import { Canvas } from "@react-three/fiber"
 import { useGLTF } from "@react-three/drei"
 // import { LoopOnce, NearestFilter } from "three"
-import { useRef, useState} from "react"
+import { useState} from "react"
 import { useSpring, animated, config} from "@react-spring/three"
-import { Group, Mesh } from "three"
+import { Mesh } from "three"
 import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing"
 import { BlendFunction } from "postprocessing"
 

@@ -14,7 +14,7 @@ import Hello from './components/Hello'
 
 const App = () => {
   const [firstClicked, setFirstClicked] = useState(false)
-  const [currentSection, setCurrentSection]= useState(null)
+  // const [currentSection, setCurrentSection]= useState(null)
 
   return (
     <>

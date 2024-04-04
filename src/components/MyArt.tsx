@@ -6,7 +6,7 @@ const MyArt = () => {
     )
 
     return (
-        <ModuleBlock smallContent={myArt} heading="3D Art" isCollapsible={false}/>
+        <ModuleBlock content={myArt} heading="3D Art" />
     )
 }
 
