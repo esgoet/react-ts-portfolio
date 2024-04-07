@@ -30,7 +30,7 @@ const MyImage = () => {
 
             </img>
             <div className=" -z-10 absolute top-0 left-0 w-full h-full flex place-items-center place-content-center ">
-                <div className="aspect-square rounded-lg border-black w-8/12 border-2 "></div>
+                <div className="aspect-square rounded-lg border-black w-8/12 border-2 bg-peach "></div>
 
             </div>
             

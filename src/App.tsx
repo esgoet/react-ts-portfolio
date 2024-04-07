@@ -10,6 +10,8 @@ import ModuleBlock from './components/ModuleBlock'
 import MyImage from './components/MyImage'
 import MyArt from './components/MyArt'
 import Hello from './components/Hello'
+import Background from './components/Background'
+import Interests from './components/Interests'
 // import Rain from './components/Rain'
 
 const App = () => {
@@ -55,8 +57,8 @@ const App = () => {
           <div/>
         
           <About />
-          <ModuleBlock heading="My Background" />
-          <MyArt />
+          <Background />
+          <Interests/>
           <Projects />
           <MyArt />
 
