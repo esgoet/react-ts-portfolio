@@ -35,7 +35,7 @@ import portfolio from "./3Dportfolio.png";
 import bearopedia from "./bearopedia.png";
 import turtlefractalgenerator from "./turtlefractalgenerator.png";
 
-import portrait from "./portrait.jpg";
+import portrait from "./portrait_nobg.png";
 
 export {
   logo,

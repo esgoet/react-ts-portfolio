@@ -68,7 +68,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
         <div
           className="sm:flex-none sm:w-[320px] flex flex-col justify-between snap-start"
         >
-          <div className="p-5 bg-primary border-2 border-black rounded-t-lg h-full">
+          <div className="p-5 bg-primary border border-black rounded-t-lg h-full">
             <div className="relative w-full h-[150px] ">
               <img
                 src={image}
@@ -101,7 +101,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
           </div>
   
           <div
-            className={`flex flex-wrap justify-end gap-1 w-full border-black border-2 border-t-0 bg-lilac p-3 rounded-b-lg`}
+            className={`flex flex-wrap justify-end gap-1 w-full border-black border border-t-0 bg-lilac p-3 rounded-b-lg`}
           >
             {tags.map((tag) => (
               <p
@@ -241,7 +241,7 @@ const Projects = () => {
         <div>
         <form
           id="filterTagsForm"
-          className="my-4 p-4 rounded-2xl flex flex-col gap-2"
+          className="my-4 p-4 rounded-lg flex flex-col gap-2  border-black border"
         >
           <div className="flex justify-between items-center">
             <div className="flex flex-row items-center px-2">
@@ -262,7 +262,7 @@ const Projects = () => {
             </button>
           </div>
 
-          <div className="flex sm:flex-row flex-col gap-2 max-w-full overflow-x-scroll">
+          <div className="flex sm:flex-row flex-col gap-2 max-w-full overflow-x-auto">
             {tagTypes.map((type) => (
               <fieldset
                 className="flex flex-wrap items-start justify-start text-black content-start gap-1 rounded-lg bg-peach/20 p-2"
