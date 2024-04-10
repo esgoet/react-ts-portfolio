@@ -15,6 +15,7 @@ export default {
         beige: "#e9dfd8",
         lavender: "#cdd2e7",
         grey: "#2e2e2e",
+        green: "#e4f3d8",
       },
       keyframes: {
         drip: {

@@ -68,20 +68,20 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
         <div
           className="sm:flex-none sm:w-[320px] flex flex-col justify-between snap-start"
         >
-          <div className="p-5 bg-primary border border-black rounded-t-lg h-full">
+          <div className="p-5 bg-white border border-black rounded-t-lg h-full">
             <div className="relative w-full h-[150px] ">
               <img
                 src={image}
                 alt={name}
                 className="w-full h-full object-cover rounded-lg border border-black"
               />
-              <div className="absolute inset-0 flex justify-end m-2 card-img_hover">
+              <div className="absolute inset-0 flex m-2 justify-end align-start">
                 <a
                   href={source_code_link}
                   target="_blank"
                   rel="external"
-                  className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer drop-shadow-md bg-black-100/70 hover:bg-black-300 font-bold text-[18px] align-middle text-center"
-                >{`</>`}</a>
+                  className="h-10 w-10 rounded-full border border-black flex place-items-center place-content-center cursor-pointer bg-peach hover:bg-peach/80 font-bold text-md text-white"
+                >{`{ }`}</a>
                 {/* <div
                   onClick={() => window.open(source_code_link, "_blank")}
                   className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer drop-shadow-md bg-black-300/50 hover:bg-black-300"

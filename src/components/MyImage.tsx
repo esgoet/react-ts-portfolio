@@ -14,7 +14,7 @@ const MyImage = () => {
     <a 
         href={targetURL}
         target={newTab ? "_blank" : "_self"}
-        className="flex place-items-center peachBtn bg-peach p-3 w-14 aspect-square self-center"
+        className="flex place-items-center peachBtn bg-peach p-2 w-12 aspect-square self-center"
     >
         <img src={imgURL} alt={imgAlt} className="w-full aspect-square object-contain" />
     </a>
@@ -47,7 +47,7 @@ const MyImage = () => {
     )
 
     return (
-        <ModuleBlock content={myImage} hasContent={false}/>
+        <ModuleBlock content={myImage}/>
     )
 }
 

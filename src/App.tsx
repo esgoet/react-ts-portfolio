@@ -6,7 +6,6 @@ import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
 import { useState } from 'react'
-import ModuleBlock from './components/ModuleBlock'
 import MyImage from './components/MyImage'
 import MyArt from './components/MyArt'
 import Hello from './components/Hello'
@@ -58,7 +57,11 @@ const App = () => {
         
           <About />
           <Background />
+          <div className='grid grid-flow-col grid-cols-subgrid col-span-2 place-items-stretch'>
+
           <Interests/>
+
+          </div>
           <Projects />
           <MyArt />
 

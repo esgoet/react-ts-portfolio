@@ -2,21 +2,21 @@ import ModuleBlock from "./ModuleBlock";
 
 const Hello = () => {
     const hello = (
-        <div className="flex flex-col gap-3 items-start">
+        <div className="relative flex flex-col gap-3 items-start">
         <h3 className={`text-black text-3xl font-light`}>
           Hi, I'm Eva
         </h3>
-        <p className="sm:text-base text-sm text-lilac ">
-          MSc Interactive Media | MSc Clinical Psychology
+        <p className="text-sm text-lilac -mt-2">
+          MSc Interactive Media | MSc Clin. Psychology
         </p>
-        <p className={`text-black max-w-sm`}>
+        <p className={`text-black max-w-sm py-1`}>
           I love creating interactive digital tools
           that are beautiful, accessible and
           improve our daily life.
         </p>
         <a
           href="#contact"
-          className="peachBtn hover:text-black"    
+          className="peachBtn absolute -bottom-24 hover:text-black"    
            >
           Get in touch
         </a>
@@ -24,7 +24,7 @@ const Hello = () => {
     )
     return (
         <>
-        <ModuleBlock heading="Welcome" sectionId='home' content={hello}/>
+        <ModuleBlock heading="🌦" sectionId='home' content={hello}/>
         </>
     )
 }

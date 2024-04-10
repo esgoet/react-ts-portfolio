@@ -1,23 +1,22 @@
 import {
   logo,
   javascript,
-  // typescript,
+  typescript,
   html,
   css,
   reactjs,
-  // redux,
+  redux,
   tailwind,
   nodejs,
-  // mongodb,
   git,
-  // figma,
-  docker,
   webvr,
   vrautism,
   portfolio,
   threejs,
   bearopedia,
-  turtlefractalgenerator
+  turtlefractalgenerator,
+  hangman,
+  menuapp
 } from "../assets";
 
 export const navLinks: {
@@ -87,10 +86,10 @@ const technologies: {
     name: "JavaScript",
     icon: javascript,
   },
-  // {
-  //   name: "TypeScript",
-  //   icon: typescript,
-  // },
+  {
+    name: "TypeScript",
+    icon: typescript,
+  },
   {
     name: "React JS",
     icon: reactjs,
@@ -108,6 +107,10 @@ const technologies: {
     icon: threejs,
   },
   {
+    name: "Redux",
+    icon: redux
+  },
+  {
     name: "git",
     icon: git,
   },
@@ -117,15 +120,15 @@ const technologies: {
   // },
   {
     name: "Swift",
-    icon: docker,
+    icon: css,
   },
   {
     name: "Python",
-    icon: docker,
+    icon: css,
   },
   {
     name: "C#",
-    icon: docker,
+    icon: css,
   },
 ];
 
@@ -177,6 +180,80 @@ const projects: {
   filtered: boolean;
 }[] = [
   {
+    name: "Web Menu for Food Delivery",
+    description: "A prototype for a delivery app using React, Typescript and Redux with persistent local storage",
+    tags: [
+      {
+        name: "TypeScript",
+        type: "language",
+      },
+      {
+        name: "React",
+        type: "library",
+      },
+      {
+        name: "Redux",
+        type: "library",
+      },
+      {
+        name: "CSS",
+        type: "language",
+      },
+      {
+        name: "HTML5",
+        type: "language",
+      },
+      {
+        name: "Web",
+        type: "platform",
+      },
+      {
+        name: "Desktop",
+        type: "device",
+      },
+    ],
+    image: menuapp,
+    source_code_link: "https://github.com/esgoet/menu-app",
+    filtered: false,
+  },
+  {
+    name: "The Hangman Game as a ReactJS App",
+    description: "A web application to play word-guessing game Hangman",
+    tags: [
+      {
+        name: "TypeScript",
+        type: "language",
+      },
+      {
+        name: "React",
+        type: "library",
+      },
+      {
+        name: "tailwindcss",
+        type: "library",
+      },
+      {
+        name: "CSS",
+        type: "language",
+      },
+      {
+        name: "HTML5",
+        type: "language",
+      },
+      {
+        name: "Web",
+        type: "platform",
+      },
+      {
+        name: "Desktop",
+        type: "device",
+      },
+    ], 
+    image: hangman,
+    source_code_link: "https://github.com/esgoet/hangman",
+    filtered: false,
+  },
+  {
     name: "VR as an Autism Awareness Tool",
     description:
       "VR application that allows users to experience autistic symptoms from a first-person perspective in a health care setting to improve empathy and care for autistic patients.",
@@ -201,6 +278,7 @@ const projects: {
         name: "Unity",
         type: "software",
       },
+      
     ],
     image: vrautism,
     source_code_link:
@@ -221,7 +299,7 @@ const projects: {
         type: "library",
       },
       {
-        name: "tailwind",
+        name: "tailwindcss",
         type: "library",
       },
       {

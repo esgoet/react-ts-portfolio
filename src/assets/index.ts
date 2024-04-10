@@ -4,12 +4,9 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 
 import css from "./tech/css.png";
-import docker from "./tech/docker.png";
-import figma from "./tech/figma.png";
 import git from "./tech/git.png";
 import html from "./tech/html.png";
 import javascript from "./tech/javascript.png";
-import mongodb from "./tech/mongodb.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
@@ -29,11 +26,13 @@ import github from "./socialmedia/github-mark-white.svg"
 import email from "./socialmedia/email.svg"
 
 
-import webvr from "./InteractiveWebVR.png";
-import vrautism from "./VRautism.png";
-import portfolio from "./3Dportfolio.png";
-import bearopedia from "./bearopedia.png";
-import turtlefractalgenerator from "./turtlefractalgenerator.png";
+import webvr from "./projects/InteractiveWebVR.png";
+import vrautism from "./projects/VRautism.png";
+import portfolio from "./projects/3Dportfolio.png";
+import bearopedia from "./projects/bearopedia.png";
+import turtlefractalgenerator from "./projects/turtlefractalgenerator.png";
+import hangman from "./projects/hangman.png";
+import menuapp from "./projects/menu-app.png"
 
 import portrait from "./portrait_nobg.png";
 
@@ -42,12 +41,9 @@ export {
   menu,
   close,
   css,
-  docker,
-  figma,
   git,
   html,
   javascript,
-  mongodb,
   nodejs,
   reactjs,
   redux,
@@ -59,6 +55,8 @@ export {
   portfolio,
   bearopedia,
   turtlefractalgenerator,
+  hangman,
+  menuapp,
   codesymbol,
   linkedin,
   github,
