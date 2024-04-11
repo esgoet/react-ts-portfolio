@@ -11,6 +11,7 @@ import MyArt from './components/MyArt'
 import Hello from './components/Hello'
 import Background from './components/Background'
 import Interests from './components/Interests'
+import MyTech from './components/MyTech'
 // import Rain from './components/Rain'
 
 const App = () => {
@@ -57,16 +58,18 @@ const App = () => {
         
           <About />
           <Background />
+          <MyTech />
           <div className='grid grid-flow-col grid-cols-subgrid col-span-2 place-items-stretch'>
 
           <Interests/>
 
           </div>
           <Projects />
-          <MyArt />
+
+          
 
             
-          
+          <MyImage />
           <Contact />
           <MyArt />
 

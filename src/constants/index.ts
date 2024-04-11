@@ -181,7 +181,7 @@ const projects: {
 }[] = [
   {
     name: "Web Menu for Food Delivery",
-    description: "A prototype for a delivery app using React, Typescript and Redux with persistent local storage",
+    description: "A prototype with TheMealDB API for a delivery app using React, Typescript and Redux with persistent local storage",
     tags: [
       {
         name: "TypeScript",

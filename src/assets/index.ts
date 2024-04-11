@@ -35,6 +35,7 @@ import hangman from "./projects/hangman.png";
 import menuapp from "./projects/menu-app.png"
 
 import portrait from "./portrait_nobg.png";
+import welcomeWriting from "./welcomeWriting.svg";
 
 export {
   logo,
@@ -66,5 +67,6 @@ export {
   rightarrow,
   leftarrow,
   interests,
-  hobbies
+  hobbies,
+  welcomeWriting
 };

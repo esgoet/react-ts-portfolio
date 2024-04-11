@@ -1,11 +1,14 @@
 import { Canvas } from "@react-three/fiber"
 import { useGLTF } from "@react-three/drei"
 // import { LoopOnce, NearestFilter } from "three"
-import { useState} from "react"
+import { Suspense, useState} from "react"
 import { useSpring, animated, config} from "@react-spring/three"
-import { Mesh } from "three"
+// import { Group, Mesh } from "three"
 import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing"
 import { BlendFunction } from "postprocessing"
+
+import CanvasLoader from "../Loader.tsx"
+import Welcome from "../Welcome.tsx"
 
 interface CloudsProps {
     onClick: () => void,
@@ -31,7 +34,7 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
     const { rightRotation } = useSpring({ rightRotation: clicked ? [0,-0.7,0] : [0,0,0], config: config.slow})
 
     // add animations here if using them later on
-    const { scene, materials }= useGLTF('/react-ts-portfolio/clouds/clouds_anim.gltf')
+    const { nodes }= useGLTF('/react-ts-portfolio/clouds/clouds_grouped.glb')
 
 //      // Extract animation actions
 //   const { ref, actions } = useAnimations(animations);
@@ -65,7 +68,7 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
                 blendFunction={BlendFunction.SCREEN}
                 />
             </EffectComposer>  
-            <Select enabled>
+            {/* <Select > */}
                 <group
                     onClick={onClick}   
                     onPointerEnter={onPointerEnter}
@@ -77,50 +80,54 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
                         position={leftCloudsPos  as any}   
                         rotation={leftRotation  as any}         
                     >
-                        {scene.children.map((cloud) => {
+                         <primitive object={nodes.leftClouds}/>
+                        {/* {scene.children.map((cloud) => {
                             const cloudIndex = parseInt(cloud.name.slice(-3))
                             if (cloudIndex <= 10) {
-                                if (cloud instanceof Mesh){
+                                if (cloud instanceof Group){
                                     return (
-                                        <mesh
-                                        key={cloud.name}
-                                        name={cloud.name}
-                                        geometry={cloud.geometry}
-                                        position={cloud.position}
-                                        material={materials.CloudMaterial}
-                                        /> 
+                                        <primitive key={cloud.name} object={cloud} position={cloud.position}/>
+                                        // <mesh
+                                        // key={cloud.name}
+                                        // name={cloud.name}
+                                        // geometry={cloud.geometry}
+                                        // position={cloud.position}
+                                        // material={materials.CloudMaterial}
+                                        // /> 
                                         )
                                 }
                             }
                             return 
-                        })}
+                        })} */}
                     </animated.group> 
                     <animated.group
                         position={rightCloudsPos  as any}
                         rotation={rightRotation  as any}
                     >
-                        {scene.children.map((cloud) => {     
+                        <primitive object={nodes.rightClouds}/>
+                        {/* {scene.children.map((cloud) => {     
                             const cloudIndex = parseInt(cloud.name.slice(-3))
                             if (cloudIndex > 10) {
-                                if (cloud instanceof Mesh){
+                                if (cloud instanceof Group){
                                     return (
-                                        <mesh
-                                        key={cloud.name}
-                                        name={cloud.name}
-                                        geometry={cloud.geometry}
-                                        position={cloud.position}
-                                        material={materials.CloudMaterial}
-                                        />
+                                        <primitive key={cloud.name} object={cloud} position={cloud.position} />
+                                        // <mesh
+                                        // key={cloud.name}
+                                        // name={cloud.name}
+                                        // geometry={cloud.geometry}
+                                        // position={cloud.position}
+                                        // material={materials.CloudMaterial}
+                                        // />
                                         )
                                 }
                         
                             }
                             return
-                        })}
+                        })} */}
 
                     </animated.group>
                 </group>  
-            </Select>
+            {/* </Select> */}
         </Selection>
         
        
@@ -130,6 +137,8 @@ const Clouds = ({onClick, onPointerEnter, onPointerLeave, clicked, hovered} : Cl
     )
 }
 
+useGLTF.preload("/react-ts-portfolio/clouds/clouds_grouped.glb");
+
 interface CloudCanvasProps {
     clicked: boolean,
     handleClick: () => void
@@ -137,6 +146,8 @@ interface CloudCanvasProps {
 const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
     const [hovered, setHovered] = useState(false)
     // const cloudsRef = useRef(null)
+
+
 
     return (
         <>
@@ -154,6 +165,8 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
           }}
         //   orthographic
          >
+            <Suspense fallback={<CanvasLoader/>}>
+
             <Clouds 
             onClick={handleClick}  
             onPointerEnter={() => setHovered(true)}
@@ -164,6 +177,9 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
             />
    
 
+            </Suspense>
+    
+
                     {/* <ambientLight intensity={3} color={0xffffff} /> */}
         <hemisphereLight intensity={3} color={0xc4eaff} groundColor={0xffe6cc}/>
        
@@ -172,6 +188,9 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
     
             
         </Canvas>
+        <Welcome clicked={clicked} />
+
+
 
          </div>
 
