@@ -36,6 +36,13 @@ body {
     rounded-lg self-end
 
   }
+  .hoverContainer figcaption {
+    @apply opacity-100
+
+  }
+  .hoverContainer:hover figcaption {
+    @apply transition opacity-0
+  }
 }
 
 .welcomePath {

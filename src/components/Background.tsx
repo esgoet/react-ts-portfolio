@@ -23,7 +23,7 @@ const Background = () => {
     const background = (
         <>
         <div className="flex flex-col gap-1 px-2.5 py-1 pb-4 w-full ">
-            <div className="flex flex-row gap-2 place-content-stretch place-items-stretch rounded-lg border-black border">
+            <div className=" bg-white/50 flex flex-row gap-2 place-content-stretch place-items-stretch rounded-lg border-black border">
               <div className="font-bold bg-peach p-2 pl-3 rounded-l-lg flex items-center">
                 <p>2023</p>
               </div>
@@ -35,7 +35,7 @@ const Background = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-row gap-2 place-content-stretch place-items-stretch rounded-lg border-black border">
+            <div className="bg-white/50 flex flex-row gap-2 place-content-stretch place-items-stretch rounded-lg border-black border">
               <div className="font-bold bg-peach p-2 pl-3 rounded-l-lg flex items-center">
                 <p className="">2020</p>
               </div>

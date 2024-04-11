@@ -68,7 +68,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
         <div
           className="sm:flex-none sm:w-[320px] flex flex-col justify-between snap-start"
         >
-          <div className="p-5 bg-white border border-black rounded-t-lg h-full">
+          <div className="p-5 border bg-white/50 border-black rounded-t-lg h-full">
             <div className="relative w-full h-[150px] ">
               <img
                 src={image}

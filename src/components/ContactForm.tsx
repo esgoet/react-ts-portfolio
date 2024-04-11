@@ -54,7 +54,7 @@ const Input = (props : InputProps) => (
    );
  };
 
-const Contact = () => {
+const ContactForm = () => {
     const formRef = useRef<HTMLFormElement>();
     const [form, setForm] = useState({
         name: '',
@@ -121,9 +121,9 @@ const Contact = () => {
        
     }
 
-    const contact = (
+    const contactForm = (
         <>
-        <p className="italic mb-3 text-balance px-2 sm:px-10">Pop me a message below and I'll get back to you!</p>
+        <p className="mb-3 text-balance px-2 sm:px-10">Please enter your details and message below.</p>
         <form
             ref={formRef as any}
             onSubmit={handleSubmit}
@@ -165,9 +165,9 @@ const Contact = () => {
     )
     return (
         <>   
-        <ModuleBlock heading="Contact Me" sectionId='contact' content={contact} gridPos={'col-span-2 row-span-2'} />
+        <ModuleBlock heading="Contact Me" sectionId='contact' content={contactForm} gridPos={'col-span-2 row-span-2'} />
         </>
     )
 }
 
-export default Contact;
+export default ContactForm;

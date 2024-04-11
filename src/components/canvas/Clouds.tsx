@@ -4,7 +4,7 @@ import { useGLTF } from "@react-three/drei"
 import { Suspense, useState} from "react"
 import { useSpring, animated, config} from "@react-spring/three"
 // import { Group, Mesh } from "three"
-import { EffectComposer, Outline, Select, Selection } from "@react-three/postprocessing"
+import { EffectComposer, Outline, Selection } from "@react-three/postprocessing"
 import { BlendFunction } from "postprocessing"
 
 import CanvasLoader from "../Loader.tsx"

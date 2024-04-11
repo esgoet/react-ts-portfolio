@@ -7,8 +7,11 @@ import {
   reactjs,
   redux,
   tailwind,
-  nodejs,
+  // nodejs,
   git,
+  swift,
+  python,
+  csharp,
   webvr,
   vrautism,
   portfolio,
@@ -75,11 +78,11 @@ const technologies: {
   icon: string;
 }[] = [
   {
-    name: "HTML 5",
+    name: "HTML5",
     icon: html,
   },
   {
-    name: "CSS 3",
+    name: "CSS3",
     icon: css,
   },
   {
@@ -91,19 +94,19 @@ const technologies: {
     icon: typescript,
   },
   {
-    name: "React JS",
+    name: "ReactJS",
     icon: reactjs,
   },
   {
-    name: "Tailwind CSS",
+    name: "tailwindcss",
     icon: tailwind,
   },
+  // {
+  //   name: "NodeJS",
+  //   icon: nodejs,
+  // },
   {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "Three JS",
+    name: "ThreeJS",
     icon: threejs,
   },
   {
@@ -120,15 +123,15 @@ const technologies: {
   // },
   {
     name: "Swift",
-    icon: css,
+    icon: swift,
   },
   {
     name: "Python",
-    icon: css,
+    icon: python,
   },
   {
     name: "C#",
-    icon: css,
+    icon: csharp,
   },
 ];
 

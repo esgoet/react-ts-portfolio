@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import ModuleBlock from "./ModuleBlock"
-import { OrbitControls, PresentationControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
 const MyArt = () => {
     const satellite = useGLTF('/react-ts-portfolio/satellite/satellite.glb');

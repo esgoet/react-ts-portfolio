@@ -1,7 +1,6 @@
 import NavBar from './components/NavBar'
 import About from './components/About'
 import Projects from './components/Projects'
-import Contact from './components/Contact'
 import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
@@ -12,6 +11,8 @@ import Hello from './components/Hello'
 import Background from './components/Background'
 import Interests from './components/Interests'
 import MyTech from './components/MyTech'
+import ContactForm from './components/ContactForm'
+import ContactBlurb from './components/ContactBlurb'
 // import Rain from './components/Rain'
 
 const App = () => {
@@ -69,8 +70,8 @@ const App = () => {
           
 
             
-          <MyImage />
-          <Contact />
+          <ContactBlurb />
+          <ContactForm />
           <MyArt />
 
 
