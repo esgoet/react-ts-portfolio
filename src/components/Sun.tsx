@@ -2,13 +2,14 @@ import { useSpring, animated, config } from "@react-spring/web"
 
 interface SunProps {
     onClick: () => void,
-    clicked: boolean
+    clicked: boolean,
+    isMobile: boolean
 }
 
-const Sun = ({clicked, onClick} : SunProps) => {
+const Sun = ({clicked, isMobile, onClick} : SunProps) => {
     const { top } = useSpring({
         from: { top: -370 },
-        top: clicked ? 20 : -370,
+        top: clicked && isMobile ? 10 : clicked ? 20 : -370,
         delay: 750,
         config: config.wobbly
         })
@@ -18,7 +19,7 @@ const Sun = ({clicked, onClick} : SunProps) => {
         <animated.div 
             onClick={onClick} 
             style={{top: top}} 
-            className={`sm:z-20 -z-20 absolute w-[300px] h-[300px] -right-10 flex place-items-center place-content-center`}>
+            className={`z-20 absolute w-16 h-16 right-4 sm:w-[300px] sm:h-[300px] sm:-right-10 flex place-items-center place-content-center`}>
             <div className={`absolute bg-white blur-lg rounded-full  w-full h-full`} />
             <div className={`absolute bg-white rounded-3xl animate-spin-slow w-[80%] h-[50%] blur-lg`}/>
             <div className={`absolute bg-white rounded-3xl animate-spin-slower w-[60%] h-[80%] blur-lg`}/>

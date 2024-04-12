@@ -4,7 +4,7 @@ import Projects from './components/Projects'
 import CloudCanvas from './components/canvas/Clouds'
 import Sun from './components/Sun'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import MyImage from './components/MyImage'
 import MyArt from './components/MyArt'
 import Hello from './components/Hello'
@@ -17,6 +17,31 @@ import ContactBlurb from './components/ContactBlurb'
 
 const App = () => {
   const [firstClicked, setFirstClicked] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Add a listener for changes to the screen size
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+
+    // Set the initial value of the `isMobile` state variable
+    setIsMobile(mediaQuery.matches);
+
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event : MediaQueryListEvent) => {
+ 
+      setIsMobile(event.matches);
+      
+    };
+
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    // Remove the listener when the component is unmounted
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
   // const [currentSection, setCurrentSection]= useState(null)
 
   return (
@@ -26,6 +51,7 @@ const App = () => {
         <div className='sm:max-w-5xl sm:mx-auto relative -top-10'>
         <Sun 
           clicked={firstClicked}   
+          isMobile={isMobile}
           onClick={()=>setFirstClicked(!firstClicked)}
         />
         </div>
@@ -37,12 +63,12 @@ const App = () => {
         
 
       </header>
-      <div className='sm:my-[100px] '>
+      <div className='my-[100px] '>
 
         {/* <nav className='w-full h-full sticky top-0 p-2 mb-1.5 z-10 backdrop-blur-md bg-amber-50/60 border-y-2 border-black'> */}
         <nav className='w-full h-full sticky top-0 p-2 mb-1.5 z-10 bg-blue border-b-2 border-black'>
           <div
-            className='sm:max-w-5xl sm:mx-auto gap-2 flex place-items-center'
+            className='sm:max-w-5xl max-w-screen sm:mx-auto gap-2 flex place-items-center'
           >
 
             <NavBar />    
