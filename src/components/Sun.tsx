@@ -8,18 +8,25 @@ interface SunProps {
 
 const Sun = ({clicked, isMobile, onClick} : SunProps) => {
     const { top } = useSpring({
-        from: { top: -370 },
-        top: clicked && isMobile ? 10 : clicked ? 20 : -370,
+        from: { top: isMobile ? -150 : -370 },
+        top: clicked && isMobile ? -35 : clicked && !isMobile ? 20 : -370,
         delay: 750,
         config: config.wobbly
         })
+    // const [{ mobileTop }] = useSpring(() => ({
+    //     from: { mobileTop: -150 },
+    //     to: { mobileTop : -35},
+    //     config: config.wobbly,
+    //     }))
+
+
     
     return (
         <>
         <animated.div 
             onClick={onClick} 
-            style={{top: top}} 
-            className={`z-20 absolute w-16 h-16 right-4 sm:w-[300px] sm:h-[300px] sm:-right-10 flex place-items-center place-content-center`}>
+            style={{top}} 
+            className={`sm:z-20 z-z-10 absolute w-14 h-14 right-4 sm:w-[300px] sm:h-[300px] sm:-right-10 flex place-items-center place-content-center`}>
             <div className={`absolute bg-white blur-lg rounded-full  w-full h-full`} />
             <div className={`absolute bg-white rounded-3xl animate-spin-slow w-[80%] h-[50%] blur-lg`}/>
             <div className={`absolute bg-white rounded-3xl animate-spin-slower w-[60%] h-[80%] blur-lg`}/>

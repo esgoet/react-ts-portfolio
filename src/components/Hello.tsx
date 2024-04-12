@@ -16,7 +16,7 @@ const Hello = () => {
         </p>
         <a
           href="#contact"
-          className="peachBtn absolute -bottom-24 hover:text-black"    
+          className="peachBtn hover:text-black"    
            >
           Get in touch
         </a>

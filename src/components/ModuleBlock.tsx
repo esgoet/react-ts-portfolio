@@ -16,7 +16,7 @@ const ModuleBlock = ({sectionId = '', heading = '', content, gridPos = ''} : Mod
     return (
         <>
         {/* {isSelected && <div className={`relative bg-peach/70 rounded-lg border-black border-2 border-solid min-h-[230px] aspect-square w-[230px]`}/>} */}
-        <section id={sectionId} className={`relative bg-white/60 backdrop-blur-lg m-4 sm:m-0 ${heading.length > 0 ? "p-5" : "p-0"} rounded-lg border-black border-2 border-solid  ${gridPos.length === 0 && "sm:aspect-square sm:min-h-[230px]"} ${gridPos} scroll-mt-20 snap-start`} >
+        <section id={sectionId} className={`relative bg-white/60 backdrop-blur-lg m-4 sm:m-0 ${heading.length > 0 ? "p-5" : "p-0"} rounded-lg border-black border-2 border-solid  ${gridPos.length === 0 && "sm:aspect-square sm:min-h-[230px] h-fit"} ${gridPos} scroll-mt-20 snap-start`} >
 
             {heading.length > 0 && <h2 className="font-bold text-xl mb-3 -mt-1 text-right">{heading}</h2>}
             {/* {isSelected || collapseOverridden ? content : smallContent} */}

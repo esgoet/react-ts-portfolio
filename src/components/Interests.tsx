@@ -5,13 +5,13 @@ const Interests = () => {
     const myInterests = (
         <>
 
-            <div className="flex w-full h-full font-medium flex-row items-stretch place-content-center justify-start gap-4">
+            <div className="flex w-full h-full flex-row items-stretch place-content-center justify-start gap-4">
                 <img
                 src={interests}
                 alt="interests"
                 className="w-[60px] rounded-l-md bg-peach p-3"
               />
-              <ul className="flex flex-col place-content-center">
+              <ul className="flex flex-col py-2 place-content-center">
                 <li>Accessibility</li>
                 <li>Digital Education</li>
                 <li>Mental Health Awareness</li>
@@ -25,7 +25,7 @@ const Interests = () => {
         <>
 
 
-            <div className="flex w-full font-medium h-full flex-row items-stretch place-content-center justify-start gap-4">
+            <div className="flex w-full text-base h-full flex-row items-stretch place-content-center justify-start gap-4">
             <img
                 src={hobbies}
                 alt="hobbies"

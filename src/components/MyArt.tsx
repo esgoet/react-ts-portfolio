@@ -31,7 +31,7 @@ const MyArt = () => {
     )
 
     return (
-        <ModuleBlock content={myArt}/>
+        <ModuleBlock content={myArt} gridPos="aspect-square"/>
     )
 }
 

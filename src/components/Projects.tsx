@@ -66,7 +66,7 @@ const ProjectTag = ({name, type, size, onClick, filterType, weight} : TagProps )
     return (
       <>
         <div
-          className="sm:flex-none sm:w-[320px] flex flex-col justify-between snap-start"
+          className="flex-none w-[320px] flex flex-col justify-between snap-start"
         >
           <div className="p-5 border bg-white/50 border-black rounded-t-lg h-full">
             <div className="relative w-full h-[150px] ">
@@ -287,7 +287,7 @@ const Projects = () => {
           </div>
         </form>
         <div
-        className="flex flex-wrap sm:flex-nowrap sm:overflow-x-scroll gap-5 justify-start w-full px-4 snap-x snap-mandatory"
+        className="flex flex-nowrap overflow-x-scroll gap-5 justify-start w-full px-4 snap-x snap-mandatory"
         id="projectGallery" ref={galleryRef}
         >
         {currentProjects.map((project) => (

@@ -8,7 +8,6 @@ import { EffectComposer, Outline, Selection } from "@react-three/postprocessing"
 import { BlendFunction } from "postprocessing"
 
 import CanvasLoader from "../Loader.tsx"
-import Welcome from "../Welcome.tsx"
 
 interface CloudsProps {
     onClick: () => void,
@@ -188,7 +187,6 @@ const CloudCanvas = ({clicked, handleClick} : CloudCanvasProps) => {
     
             
         </Canvas>
-        <Welcome clicked={clicked} />
 
 
 
